@@ -1,0 +1,34 @@
+:root{
+  --bg: #f6f6f6;
+  --muted: #666;
+  --accent: #2b6cb0;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: Inter, Arial, sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:#222;
+}
+
+.app-root{min-height:100vh;display:flex;flex-direction:column}
+.main{flex:1}
+
+.header, .footer{background:#333;color:white;text-align:center;padding:1rem}
+.page{padding:2rem;text-align:center}
+.muted{color:var(--muted)}
+
+.btn{margin:0.4rem;padding:0.6rem 1rem;border-radius:6px;border:1px solid #ccc;background:white;cursor:pointer}
+.btn-sm{padding:0.3rem 0.6rem;font-size:0.9rem}
+
+.game-board{display:grid;grid-template-columns:repeat(4,100px);justify-content:center;gap:1rem;margin-top:1.2rem}
+.card{width:100px;height:100px;background:white;border:2px solid #999;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.card-front{font-weight:bold}
+
+.results-table{margin:1rem auto;border-collapse:collapse;width:90%;max-width:600px}
+.results-table th, .results-table td{border:1px solid #ddd;padding:0.5rem;text-align:center}
+
+@media (max-width:480px){
+  .game-board{grid-template-columns:repeat(2,100px)}
+}
