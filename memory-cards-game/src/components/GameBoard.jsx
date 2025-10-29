@@ -1,12 +1,17 @@
 import React from 'react'
 import Card from './Card'
-import { placeholderCards } from '../data/placeholderData'
 
-export default function GameBoard() {
+export default function GameBoard({ cards, flipped, matched, onFlip }) {
   return (
-    <div className="game-board" aria-label="game-board">
-      {placeholderCards.map((c) => (
-        <Card key={c.id} index={c.id - 1} label={c.label} />
+    <div className="game-board">
+      {cards.map((c, i) => (
+        <Card
+          key={c.uid}
+          label={c.label}
+          isFlipped={flipped.includes(i)}
+          isMatched={matched.includes(i)}
+          onClick={() => onFlip(i)}
+        />
       ))}
     </div>
   )
