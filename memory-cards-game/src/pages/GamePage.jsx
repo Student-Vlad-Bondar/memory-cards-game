@@ -1,24 +1,63 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useGame } from '../hooks/useGame'
 import { useTimer } from '../hooks/useTimer'
 import GameBoard from '../components/GameBoard'
+import GameOverDialog from '../components/GameOverDialog'
+import { useResults } from '../hooks/useResults'
+import { useSettingsContext } from '../contexts/SettingsContext'
+import { useUserContext } from '../contexts/UserContext'
 
 export default function GamePage() {
-  const { cards, flipped, matched, moves, isFinished, flipCard, resetGame } = useGame()
+  const { settings } = useSettingsContext()
+  const { currentUser } = useUserContext()
+  const { cards, flipped, matched, moves, isFinished, flipCard, resetGame, playerTurn, scores } = useGame()
   const { formatTime, resetTimer } = useTimer(!isFinished)
+  const { addResult } = useResults()
+
+  const handleRestart = () => {
+    resetGame()
+    resetTimer()
+  }
+
+  useEffect(() => {
+    if (isFinished) {
+      let player;
+      if (settings.twoPlayers) {
+        player = scores[1] === scores[2]
+          ? 'Нічия'
+          : scores[1] > scores[2]
+          ? 'Гравець 1'
+          : 'Гравець 2'
+      } else {
+        player = currentUser ? currentUser.username : 'Гравець'
+      }
+
+      addResult(player, moves, formatTime())
+    }
+  }, [isFinished, addResult, formatTime, moves, scores, settings.twoPlayers, currentUser])
 
   return (
     <section className="page game">
       <h2>Гра: знайди всі пари</h2>
       <p>Ходи: {moves} | Час: {formatTime()}</p>
+
+      {settings.twoPlayers && (
+        <p>
+          🧍‍♂️ Хід гравця {playerTurn} | 
+          🎯 Рахунок: {scores[1]} - {scores[2]}
+        </p>
+      )}
+
       <GameBoard cards={cards} flipped={flipped} matched={matched} onFlip={flipCard} />
 
-      {isFinished && (
-        <div className="game-finished">
-          <p>🎉 Гру завершено! Ви зробили {moves} ходів за {formatTime()}.</p>
-          <button onClick={() => { resetGame(); resetTimer(); }}>Почати заново</button>
-        </div>
-      )}
+      <GameOverDialog
+        isOpen={isFinished}
+        moves={moves}
+        scores={scores}
+        onRestart={handleRestart}
+        isTwoPlayers={settings.twoPlayers}
+        currentUser={currentUser}
+      />
     </section>
   )
 }
