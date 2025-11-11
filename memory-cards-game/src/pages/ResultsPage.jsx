@@ -1,14 +1,17 @@
 import React from 'react'
-import { sampleResults } from '../data/placeholderData'
 import Button from '../components/Button'
+import { useResults } from '../hooks/useResults'
 
 export default function ResultsPage() {
+  const { results, clearResults } = useResults()
+
   return (
     <section className="page results">
-      <h2>Результати останньої гри</h2>
+      <h2>Результати останніх ігор</h2>
 
-      <div className="results-summary">
-        <p className="muted">Тут показано приклад таблиці результатів. У наступних лабах її наповнить стейт/сервер.</p>
+      {results.length === 0 ? (
+        <p className="muted">Поки що немає результатів.</p>
+      ) : (
         <table className="results-table">
           <thead>
             <tr>
@@ -19,9 +22,9 @@ export default function ResultsPage() {
             </tr>
           </thead>
           <tbody>
-            {sampleResults.map((r) => (
+            {results.map((r, i) => (
               <tr key={r.id}>
-                <td>{r.id}</td>
+                <td>{i + 1}</td>
                 <td>{r.player}</td>
                 <td>{r.moves}</td>
                 <td>{r.time}</td>
@@ -29,11 +32,10 @@ export default function ResultsPage() {
             ))}
           </tbody>
         </table>
-      </div>
+      )}
 
       <div className="results-actions">
-        <Button>Почати нову гру</Button>
-        <Button>Повернутись на старт</Button>
+        <Button onClick={clearResults}>Очистити</Button>
       </div>
     </section>
   )
