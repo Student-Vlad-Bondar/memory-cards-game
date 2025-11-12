@@ -1,46 +1,171 @@
-:root{
+:root {
   --bg: #f6f6f6;
   --muted: #666;
   --accent: #2b6cb0;
+  --white: #fff;
+  --black: #222;
+  --grey-light: #ddd;
+  --grey-dark: #999;
+  --header-bg: #333;
+  --error: #e53e3e;
 }
 
-*{box-sizing:border-box}
-body{
-  font-family: Inter, Arial, sans-serif;
-  margin:0;
-  background:var(--bg);
-  color:#222;
+* {
+  box-sizing: border-box;
 }
 
-.app-root{min-height:100vh;display:flex;flex-direction:column}
-.main{flex:1}
-
-.header, .footer{background:#333;color:white;text-align:center;padding:1rem}
-.page{padding:2rem;text-align:center}
-.muted{color:var(--muted)}
-
-.btn{margin:0.4rem;padding:0.6rem 1rem;border-radius:6px;border:1px solid #ccc;background:white;cursor:pointer}
-.btn-sm{padding:0.3rem 0.6rem;font-size:0.9rem}
-
-.game-board{display:grid;grid-template-columns:repeat(4,100px);justify-content:center;gap:1rem;margin-top:1.2rem}
-.card{width:100px;height:100px;background:white;border:2px solid #999;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.card-front{font-weight:bold}
-
-.results-table{margin:1rem auto;border-collapse:collapse;width:90%;max-width:600px}
-.results-table th, .results-table td{border:1px solid #ddd;padding:0.5rem;text-align:center}
-
-@media (max-width:480px){
-  .game-board{grid-template-columns:repeat(2,100px)}
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  background: var(--bg);
+  color: var(--black);
+  min-height: 100vh;
 }
 
-/* --- Card flipping visual --- */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+.header,
+.footer {
+  background: var(--header-bg);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+}
+
+.page {
+  padding: 2rem;
+  text-align: center;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* --- СТИЛІ ФОРМ (НОВЕ) --- */
+.form-container {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.form-container label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="number"],
+.form-container select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--grey-light);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-container input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.form-container .error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Специфічні класи для форм */
+.register-form,
+.settings-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Сторінка профілю */
+.profile-page {
+  max-width: 450px;
+  margin: 0 auto;
+  text-align: left;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.profile-page p {
+  font-size: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--grey-light);
+}
+/* --- КІНЕЦЬ СТИЛІВ ФОРМ --- */
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.results-table {
+  margin: 1rem auto;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 600px;
+  background: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.results-table th,
+.results-table td {
+  border: 1px solid var(--grey-light);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.results-table th {
+  background-color: var(--bg);
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .game-board {
+    grid-template-columns: repeat(2, 100px);
+  }
+}
+
+/* Card flipping visual */
 .card {
   width: 100px;
   height: 100px;
-  border: 2px solid #999;
+  border: 2px solid var(--grey-dark);
   border-radius: 8px;
   cursor: pointer;
   perspective: 800px;
+  background: var(--white); /* Додано фон для .card */
 }
 
 .card-inner {
@@ -60,7 +185,7 @@ body{
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 8px; /* успадковано від .card */
   backface-visibility: hidden;
   display: flex;
   align-items: center;
@@ -69,25 +194,26 @@ body{
 }
 
 .card-front {
-  background: #333;
-  color: white;
+  background: var(--header-bg);
+  color: var(--white);
 }
 
 .card-back {
-  background: white;
-  color: #222;
+  background: var(--white);
+  color: var(--black);
   transform: rotateY(180deg);
 }
 
 .card.flipped .card-back {
   background: var(--accent);
-  color: white;
+  color: var(--white);
 }
 
+/* Dialog */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,9 +221,9 @@ body{
 }
 
 .dialog {
-  background: white;
+  background: var(--white);
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }

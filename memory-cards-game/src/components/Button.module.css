@@ -1,0 +1,25 @@
+.button {
+  margin: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+
+  font-weight: 500;
+  font-family: inherit;
+  transition: border-color 0.25s;
+}
+
+.sm {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+.md {
+  padding: 0.6rem 1rem;
+}
+
+.button:hover {
+  border-color: #646cff;
+}

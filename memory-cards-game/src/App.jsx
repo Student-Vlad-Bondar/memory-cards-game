@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import StartPage from './pages/StartPage'
@@ -7,12 +8,12 @@ import SettingsPage from './pages/SettingsPage'
 import ResultsPage from './pages/ResultsPage'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
+import ProfilePage from './pages/ProfilePage'
 import './styles/components.css'
 import { SettingsProvider } from './contexts/SettingsContext'
 import UserContext from './contexts/UserContext'
 
 export default function App() {
-  const [page, setPage] = useState('start')
   const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
@@ -24,30 +25,11 @@ export default function App() {
 
   const handleLogin = (user) => {
     setCurrentUser(user)
-    setPage('start')
   }
 
   const handleLogout = () => {
     setCurrentUser(null)
     localStorage.removeItem('loggedInUser')
-    setPage('start')
-  }
-
-  const renderPage = () => {
-    switch (page) {
-      case 'game':
-        return <GamePage />
-      case 'settings':
-        return <SettingsPage onBack={() => setPage('start')} />
-      case 'results':
-        return <ResultsPage />
-      case 'register':
-        return <RegisterPage onBack={() => setPage('start')} />
-      case 'login':
-        return <LoginPage onLoginSuccess={handleLogin} onBack={() => setPage('start')} />
-      default:
-        return <StartPage setPage={setPage} />
-    }
   }
 
   const userContextValue = {
@@ -59,8 +41,23 @@ export default function App() {
     <UserContext.Provider value={userContextValue}>
       <SettingsProvider>
         <div className="app-root">
-          <Header setPage={setPage}/>
-          <main className="main">{renderPage()}</main>
+          <Header/>
+          <main className="main">
+            <Routes>
+              <Route path="/" element={<StartPage />} />
+              <Route path="/game" element={<GamePage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/results" element={<ResultsPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage onLoginSuccess={handleLogin} />} />
+              
+              {/* 8. Динамічний роут, як вимагає лабораторна */}
+              <Route path="/profile/:username" element={<ProfilePage />} />
+
+              {/* 9. "Сторінка не знайдена" (опціонально, але корисно) */}
+              <Route path="*" element={<h2>404: Сторінку не знайдено</h2>} />
+            </Routes>
+          </main>
           <Footer />
         </div>
       </SettingsProvider>

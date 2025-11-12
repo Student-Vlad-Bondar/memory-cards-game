@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Button from './Button'
 
 export default function GameOverDialog({ isOpen, moves, scores, onRestart, isTwoPlayers, currentUser }) {
     if (!isOpen) return null
@@ -20,7 +21,7 @@ export default function GameOverDialog({ isOpen, moves, scores, onRestart, isTwo
                 <h2>🎉 Гру завершено!</h2>
                 <p>Ходи: {moves}</p>
                 <p>{winner}</p>
-                <button onClick={onRestart}>🔁 Почати заново</button>
+                <Button onClick={onRestart}>🔁 Почати заново</Button>
             </div>
         </div>,
         document.body
