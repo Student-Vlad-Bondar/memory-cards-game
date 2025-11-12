@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '../components/Button'
-import { useResults } from '../hooks/useResults'
+import { useResultsStore } from '../stores/resultsStore'
 
 export default function ResultsPage() {
-  const { results, clearResults } = useResults()
+  const { results, clearResults } = useResultsStore()
 
   return (
     <section className="page results">

@@ -1,12 +1,12 @@
 import React from 'react'
-import { useSettingsContext } from '../contexts/SettingsContext'
+import { useSettingsStore } from '../stores/settingsStore'
 import { useNavigate } from 'react-router-dom'
 import SettingsForm from '../components/SettingsForm'
 import Button from '../components/Button'
 
 export default function SettingsPage() {
     const navigate = useNavigate()
-    const { settings, setSettings } = useSettingsContext()
+    const { settings, setSettings } = useSettingsStore()
 
     return (
         <section className="page settings">
@@ -14,9 +14,9 @@ export default function SettingsPage() {
                 <SettingsForm
                     defaultValues={settings}
                     onSubmit={(data) => {
-                    setSettings(data)
-                    alert('✅ Налаштування збережено!')
-                    navigate('/')
+                        setSettings(data)
+                        alert('✅ Налаштування збережено!')
+                        navigate('/')
                     }} 
                 />
                 <Button onClick={() => navigate(-1)} style={{marginTop: '1rem'}}>⬅ Назад</Button>

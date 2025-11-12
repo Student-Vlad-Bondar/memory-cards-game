@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -10,36 +10,21 @@ import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
 import './styles/components.css'
-import { SettingsProvider } from './contexts/SettingsContext'
-import UserContext from './contexts/UserContext'
+import { useAuthStore } from './stores/authStore'
+import { useSettingsStore } from './stores/settingsStore'
+import { useResultsStore } from './stores/resultsStore'
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState(null)
+  const currentUser = useAuthStore((state) => state.currentUser)
+  const loadUserSettings = useSettingsStore((state) => state.loadUserSettings)
+  const loadUserResults = useResultsStore((state) => state.loadUserResults)
 
   useEffect(() => {
-    const loggedInUserString = localStorage.getItem('loggedInUser')
-    if (loggedInUserString) {
-      setCurrentUser(JSON.parse(loggedInUserString))
-    }
-  }, [])
-
-  const handleLogin = (user) => {
-    setCurrentUser(user)
-  }
-
-  const handleLogout = () => {
-    setCurrentUser(null)
-    localStorage.removeItem('loggedInUser')
-  }
-
-  const userContextValue = {
-    currentUser,
-    onLogout: handleLogout
-  }
+    loadUserSettings()
+    loadUserResults()
+  }, [currentUser, loadUserSettings, loadUserResults])
 
   return (
-    <UserContext.Provider value={userContextValue}>
-      <SettingsProvider>
         <div className="app-root">
           <Header/>
           <main className="main">
@@ -49,18 +34,12 @@ export default function App() {
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="/results" element={<ResultsPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/login" element={<LoginPage onLoginSuccess={handleLogin} />} />
-              
-              {/* 8. Динамічний роут, як вимагає лабораторна */}
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/profile/:username" element={<ProfilePage />} />
-
-              {/* 9. "Сторінка не знайдена" (опціонально, але корисно) */}
               <Route path="*" element={<h2>404: Сторінку не знайдено</h2>} />
             </Routes>
           </main>
           <Footer />
         </div>
-      </SettingsProvider>
-    </UserContext.Provider>
   )
 }

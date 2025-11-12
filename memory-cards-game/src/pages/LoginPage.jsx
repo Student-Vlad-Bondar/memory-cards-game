@@ -2,10 +2,12 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../stores/authStore'
 
-export default function LoginPage({ onLoginSuccess }) {
+export default function LoginPage() {
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
+    const login = useAuthStore((state) => state.login)
 
     const onSubmit = (data) => {
         const usersString = localStorage.getItem('users')
@@ -22,7 +24,7 @@ export default function LoginPage({ onLoginSuccess }) {
             alert(`✅ Вхід успішний!\nВітаємо, ${foundUser.username}!`)
             localStorage.setItem('loggedInUser', JSON.stringify(foundUser))
 
-            onLoginSuccess(foundUser)
+            login(foundUser);
             navigate('/')
         } else {
             alert('❌ Помилка: Неправильне ім’я користувача або пароль.')

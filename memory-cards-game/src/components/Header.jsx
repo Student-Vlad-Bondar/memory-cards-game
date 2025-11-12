@@ -1,14 +1,14 @@
 import React from 'react'
 import Button from './Button'
-import { useUserContext } from '../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../stores/authStore'
 
 export default function Header() {
-  const { currentUser, onLogout } = useUserContext()
+  const { currentUser, logout } = useAuthStore()
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    onLogout()
+    logout()
     navigate('/')
   }
 
