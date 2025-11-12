@@ -1,9 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../components/Button'
+import { useNavigate } from 'react-router-dom'
 
-export default function RegisterPage({ onBack }) {
+export default function RegisterPage() {
   const { register, handleSubmit, reset } = useForm()
+  const navigate = useNavigate()
 
   const onSubmit = (data) => {
     const usersString = localStorage.getItem('users')
@@ -20,19 +22,22 @@ export default function RegisterPage({ onBack }) {
     localStorage.setItem('users', JSON.stringify(newUsers))
     alert(`✅ Реєстрація успішна!\nВітаємо, ${data.username}!`)
     reset()
-    onBack?.()
+    navigate('/login')
   }
 
   return (
     <section className="page register">
-        <h2>👤 Реєстрація</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="register-form">
-            <input {...register('username', { required: true })} placeholder="Ім’я користувача" />
+        <form onSubmit={handleSubmit(onSubmit)} className="register-form form-container">
+            <h2>👤 Реєстрація</h2>
+            <label>Ім’я користувача</label>
+            <input {...register('username', { required: true })} type="text" placeholder="Ім’я користувача" />
+            <label>Email</label>
             <input {...register('email', { required: true })} type="email" placeholder="Email" />
+            <label>Пароль</label>
             <input {...register('password', { required: true })} type="password" placeholder="Пароль" />
-            <Button type="submit">Зареєструватися</Button>
+            <Button type="submit" style={{marginTop: '1rem'}}>Зареєструватися</Button>
         </form>
-        <Button onClick={onBack}>⬅ Назад</Button>
+        <Button onClick={() => navigate('/')}>⬅ Назад</Button>
     </section>
   )
 }
