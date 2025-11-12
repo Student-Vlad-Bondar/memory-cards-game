@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useSettingsContext } from '../contexts/SettingsContext'
+import { useSettingsStore } from '../stores/settingsStore'
 
 const CARD_COUNTS = {
     easy: 8,   // 4x2
@@ -24,7 +24,7 @@ const generateCards = (count) => {
 }
 
 export function useGame() {
-  const { settings } = useSettingsContext()
+  const { settings } = useSettingsStore()
   const [cards, setCards] = useState([])
   const [flipped, setFlipped] = useState([])
   const [matched, setMatched] = useState([])

@@ -3,16 +3,16 @@ import { useGame } from '../hooks/useGame'
 import { useTimer } from '../hooks/useTimer'
 import GameBoard from '../components/GameBoard'
 import GameOverDialog from '../components/GameOverDialog'
-import { useResults } from '../hooks/useResults'
-import { useSettingsContext } from '../contexts/SettingsContext'
-import { useUserContext } from '../contexts/UserContext'
+import { useResultsStore } from '../stores/resultsStore'
+import { useSettingsStore } from '../stores/settingsStore'
+import { useAuthStore } from '../stores/authStore'
 
 export default function GamePage() {
-  const { settings } = useSettingsContext()
-  const { currentUser } = useUserContext()
+  const { settings } = useSettingsStore()
+  const { currentUser } = useAuthStore()
+  const addResult = useResultsStore((state) => state.addResult)
   const { cards, flipped, matched, moves, isFinished, flipCard, resetGame, playerTurn, scores } = useGame()
   const { formatTime, resetTimer } = useTimer(!isFinished)
-  const { addResult } = useResults()
 
   const handleRestart = () => {
     resetGame()

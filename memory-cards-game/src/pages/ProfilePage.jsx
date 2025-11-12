@@ -1,13 +1,13 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useUserContext } from '../contexts/UserContext';
-import Button from '../components/Button';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
+import { useAuthStore } from '../stores/authStore';
+import Button from '../components/Button'
+import { useNavigate } from 'react-router-dom'
 
 export default function ProfilePage() {
-  const { username } = useParams();
-  const { currentUser } = useUserContext();
-  const navigate = useNavigate();
+  const { username } = useParams()
+  const { currentUser } = useAuthStore()
+  const navigate = useNavigate()
 
   if (!currentUser || currentUser.username !== username) {
     return (
