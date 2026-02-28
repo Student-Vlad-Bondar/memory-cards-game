@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { useAuthStore } from './authStore'
+import { useCookieStore } from './cookieStore'
 
 const getResultsKey = () => {
   const user = useAuthStore.getState().currentUser
@@ -18,6 +19,13 @@ export const useResultsStore = create((set, get) => ({
 
   // --- Actions ---
   addResult: (player, moves, time) => {
+    const { consent } = useCookieStore.getState()
+
+    if (!consent.statistics) {
+        console.warn('GDPR: Result not saved because statistics consent is missing.')
+        return
+    }
+    
     const newResult = { id: Date.now(), player, moves, time }
     const key = getResultsKey()
     const newResults = [...get().results, newResult]

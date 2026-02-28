@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import Cookies from 'js-cookie'
 import { useAuthStore } from './authStore'
 
 const defaultSettings = {
@@ -8,28 +9,23 @@ const defaultSettings = {
 }
 
 const getSettingsKey = () => {
-  const user = useAuthStore.getState().currentUser;
-  return user ? `gameSettings_${user.username}` : 'gameSettings_guest'
-}
-
-const loadSettings = () => {
-  const key = getSettingsKey()
-  const stored = localStorage.getItem(key)
-  return stored ? JSON.parse(stored) : defaultSettings
+  const user = useAuthStore.getState().currentUser
+  return user ? `settings_${user.username}` : 'settings_guest'
 }
 
 export const useSettingsStore = create((set) => ({
-  // --- State ---
   settings: defaultSettings,
 
-  // --- Actions ---
   setSettings: (newSettings) => {
-    const key = getSettingsKey();
-    localStorage.setItem(key, JSON.stringify(newSettings))
+    const key = getSettingsKey()
+    // Зберігаємо налаштування в кукі на 30 днів
+    Cookies.set(key, JSON.stringify(newSettings), { expires: 30 })
     set({ settings: newSettings })
   },
 
   loadUserSettings: () => {
-    set({ settings: loadSettings() })
+    const key = getSettingsKey()
+    const stored = Cookies.get(key)
+    set({ settings: stored ? JSON.parse(stored) : defaultSettings })
   },
 }))

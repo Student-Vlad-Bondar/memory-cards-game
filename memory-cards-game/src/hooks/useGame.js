@@ -17,7 +17,7 @@ const generateCards = (count) => {
   return duplicated
     .sort(() => Math.random() - 0.5)
     .map((label, i) => ({ 
-        id: i, // id та uid можуть бути однаковими
+        id: i,
         label, 
         uid: i 
     }))
