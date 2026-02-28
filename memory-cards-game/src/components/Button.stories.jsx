@@ -5,6 +5,13 @@ export default {
   title: 'UI/Button',
   component: Button,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Універсальний компонент кнопки для основних дій у грі.',
+      },
+    },
+  },
   argTypes: {
     children: { name: 'Текст', control: 'text', description: 'Текст або елементи всередині кнопки' },
     size: { 

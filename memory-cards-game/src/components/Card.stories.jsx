@@ -5,6 +5,13 @@ export default {
   title: 'Game/Card',
   component: Card,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Ігрова картка з підтримкою станів перевороту та знайденої пари.',
+      },
+    },
+  },
   argTypes: {
     label: { name: 'Символ', control: 'text', description: 'Символ або емодзі на картці' },
     isFlipped: { name: 'Перевернута', control: 'boolean', description: 'Чи повернута картка обличчям' },

@@ -5,6 +5,13 @@ export default {
   title: 'Forms/SettingsForm',
   component: SettingsForm,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Форма налаштування складності гри та швидкості анімації.',
+      },
+    },
+  },
   argTypes: {
     onSubmit: { action: 'submitted' },
     defaultValues: { name: 'Початкові дані', control: 'object' }

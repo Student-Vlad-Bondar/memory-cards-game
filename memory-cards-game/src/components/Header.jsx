@@ -7,7 +7,9 @@ import { useAuthStore } from '../stores/authStore'
  * Головна навігаційна панель додатка.
  * * Відображає логотип, посилання на основні розділи гри та блок авторизації.
  * Стан кнопок (Вхід/Реєстрація або Профіль/Вийти) залежить від наявності `currentUser`.
- * * @component
+ * @component Header
+ * @name Header
+ * @function
  * @requires useAuthStore - для отримання даних користувача та функції виходу.
  * @requires useNavigate - для переходу між сторінками.
  * @returns {JSX.Element} Шапка сайту з адаптивною навігацією.

@@ -3,7 +3,9 @@ import Card from './Card'
 
 /**
  * Контейнер ігрового поля, що відображає сітку карток.
- * * @component
+ * @component GameBoard
+ * @name GameBoard
+ * @function
  * @param {Object} props - Пропси компонента.
  * @param {Array<{uid: number|string, label: string}>} [props.cards=[]] - Масив об'єктів з даними карток.
  * @param {number[]} [props.flipped=[]] - Масив індексів карток, які зараз перевернуті.
