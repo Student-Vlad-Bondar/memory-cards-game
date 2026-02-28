@@ -45,8 +45,6 @@ npm run build
 
 ## Project Requirements Checklist
 
-This repository meets all the criteria for the COP course assessment (**24/24 points**):
-
 ### 1. License & Compliance
 The project is officially distributed under the **MIT License**.
 * **Audit:** A full dependency license audit was performed using `license-checker`.
