@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import CookieBanner from './components/CookieBanner'
 import StartPage from './pages/StartPage'
 import GamePage from './pages/GamePage'
 import SettingsPage from './pages/SettingsPage'
@@ -9,6 +10,7 @@ import ResultsPage from './pages/ResultsPage'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
+import PrivacyPage from './pages/PrivacyPage'
 import './styles/components.css'
 import { useAuthStore } from './stores/authStore'
 import { useSettingsStore } from './stores/settingsStore'
@@ -36,10 +38,13 @@ export default function App() {
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile/:username" element={<ProfilePage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              
               <Route path="*" element={<h2>404: Сторінку не знайдено</h2>} />
             </Routes>
           </main>
           <Footer />
+          <CookieBanner />
         </div>
   )
 }

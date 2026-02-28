@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/authStore'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
 

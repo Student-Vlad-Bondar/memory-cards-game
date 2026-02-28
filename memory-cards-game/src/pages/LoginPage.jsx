@@ -24,7 +24,7 @@ export default function LoginPage() {
             alert(`✅ Вхід успішний!\nВітаємо, ${foundUser.username}!`)
             localStorage.setItem('loggedInUser', JSON.stringify(foundUser))
 
-            login(foundUser);
+            login(foundUser)
             navigate('/')
         } else {
             alert('❌ Помилка: Неправильне ім’я користувача або пароль.')

@@ -1,30 +1,24 @@
 import { create } from 'zustand'
-//import { useSettingsStore } from './settingsStore'
-//import { useResultsStore } from './resultsStore'
+import Cookies from 'js-cookie'
 
 const getInitialUser = () => {
-  const storedUser = localStorage.getItem('loggedInUser')
+  // Тепер читаємо з кукі 'session_user'
+  const storedUser = Cookies.get('session_user')
   return storedUser ? JSON.parse(storedUser) : null
-};
+}
 
 export const useAuthStore = create((set) => ({
-  // --- State ---
   currentUser: getInitialUser(),
 
-  // --- Actions ---
   login: (user) => {
-    localStorage.setItem('loggedInUser', JSON.stringify(user))
+    // Зберігаємо в кукі на 7 днів
+    Cookies.set('session_user', JSON.stringify(user), { expires: 7, sameSite: 'Strict' })
     set({ currentUser: user })
-
-    //useSettingsStore.getState().loadUserSettings()
-    //useResultsStore.getState().loadUserResults()
   },
 
   logout: () => {
-    localStorage.removeItem('loggedInUser')
+    // Видаляємо кукі
+    Cookies.remove('session_user')
     set({ currentUser: null })
-
-    //useSettingsStore.getState().loadUserSettings()
-    //useResultsStore.getState().loadUserResults()
   },
 }))
