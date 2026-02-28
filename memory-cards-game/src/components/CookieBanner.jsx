@@ -3,6 +3,16 @@ import { useCookieStore } from '../stores/cookieStore'
 import Button from './Button'
 import styles from './CookieBanner.module.css'
 
+/**
+ * Банер згоди на використання файлів Cookie (GDPR).
+ * * З'являється при першому візиті користувача. Дозволяє вибрати рівень приватності:
+ * - Тільки необхідні (функціонал входу).
+ * - Дозволити всі (включаючи збереження статистики ігор).
+ * * @component
+ * @requires useCookieStore - для перевірки стану взаємодії та збереження вибору користувача.
+ * @requires CookieBanner.module.css - для ізольованої стилізації компонента.
+ * @returns {JSX.Element|null} Повертає банер або null, якщо користувач вже зробив вибір.
+ */
 export default function CookieBanner() {
   const { hasInteracted, acceptAll, declineNonEssential } = useCookieStore()
 
