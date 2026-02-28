@@ -3,6 +3,15 @@ import Button from './Button'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/authStore'
 
+/**
+ * Головна навігаційна панель додатка.
+ * * Відображає логотип, посилання на основні розділи гри та блок авторизації.
+ * Стан кнопок (Вхід/Реєстрація або Профіль/Вийти) залежить від наявності `currentUser`.
+ * * @component
+ * @requires useAuthStore - для отримання даних користувача та функції виходу.
+ * @requires useNavigate - для переходу між сторінками.
+ * @returns {JSX.Element} Шапка сайту з адаптивною навігацією.
+ */
 export default function Header() {
   const { currentUser, logout } = useAuthStore()
   const navigate = useNavigate()

@@ -227,3 +227,19 @@ body {
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
+/* Фікс для Storybook: змушуємо діалог бути чорним, а кнопку помітною */
+.dialog {
+    color: #333 !important; /* Текст заголовків та абзаців у діалозі */
+    background: white !important;
+}
+
+.dialog button {
+    color: #000 !important; /* Чорний текст на кнопці */
+    border: 1px solid #ccc;
+}
+
+/* Якщо діалог перекриває документацію в Docs, цей фікс допоможе */
+.sb-portal-fix {
+    z-index: 9999;
+}

@@ -1,6 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+/**
+ * Підвал сторінки (Footer).
+ * * Містить інформацію про авторські права, поточний рік (генерується автоматично) 
+ * та навігаційне посилання на сторінку політики конфіденційності.
+ * * @component
+ * @requires react-router-dom/Link - для внутрішньої навігації без перезавантаження.
+ * @returns {JSX.Element} Контейнер з копірайтом та правовою інформацією.
+ */
 export default function Footer() {
   return (
     <footer className="footer">
