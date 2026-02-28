@@ -66,7 +66,7 @@ A comprehensive document outlining data handling, user rights under GDPR, and te
 ### 4. Generated Documentation
 Source code is documented using the **JSDoc** standard for all components and stores.
 * **Local Access:** Open `docs/index.html` in any web browser to view the API reference.
-* **Video Demonstration:** A screen recording (./lab1.mkv) is included.
+* **Video Demonstration:** A screen recording (./lab1.mkv) is included. https://photos.app.goo.gl/geJYgVF4Y9DyTDwn7
 
 ### 5. Storybook
 A dedicated environment for isolated component development and testing.
