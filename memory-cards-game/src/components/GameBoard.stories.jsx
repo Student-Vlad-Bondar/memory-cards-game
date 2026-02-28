@@ -5,6 +5,13 @@ export default {
   title: 'Game/GameBoard',
   component: GameBoard,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Сітка ігрового поля, що керує розташуванням та станом карток.',
+      },
+    },
+  },
   argTypes: {
     cards: { 
         description: 'Масив об’єктів карток (кожна має uid та label)', 

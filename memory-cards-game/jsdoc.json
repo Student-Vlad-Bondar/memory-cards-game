@@ -1,0 +1,13 @@
+{
+    "plugins": ["plugins/markdown"],
+    "source": {
+        "include": ["src/components"],
+        "includePattern": ".+\\.jsx?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "opts": {
+        "encoding": "utf8",
+        "destination": "./docs/",
+        "recurse": true
+    }
+}

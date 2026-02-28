@@ -2,7 +2,9 @@ import React from 'react'
 
 /**
  * Компонент ігрової картки з анімацією перевороту.
- * * @component
+ * @component Card
+ * @name Card
+ * @function
  * @param {Object} props - Пропси компонента.
  * @param {string} props.label - Емодзі або символ, що відображається на звороті.
  * @param {boolean} props.isFlipped - Чи перевернута картка обличчям до гравця.

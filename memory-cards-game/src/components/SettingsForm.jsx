@@ -12,7 +12,9 @@ const schema = yup.object({
 
 /**
  * Форма налаштувань параметрів гри з валідацією через Yup.
- * * @component
+ * @component SettingsForm
+ * @name SettingsForm
+ * @function
  * @param {Object} props - Пропси компонента.
  * @param {Object} props.defaultValues - Початкові значення полів форми (difficulty, speed, twoPlayers).
  * @param {function} props.onSubmit - Функція, що викликається при успішній відправці форми.

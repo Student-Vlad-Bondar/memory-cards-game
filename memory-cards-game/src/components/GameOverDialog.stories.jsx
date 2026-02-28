@@ -11,6 +11,9 @@ export default {
     docs: {
       inlineStories: false, // Відображати у фреймі, щоб не перекривати всю сторінку Docs
       iframeHeight: 350,
+      description: {
+        component: 'Модальне вікно, що відображає результати гри та переможця.',
+      },
     },
   },
   argTypes: {

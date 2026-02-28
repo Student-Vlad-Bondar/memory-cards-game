@@ -4,7 +4,9 @@ import Button from './Button'
 
 /**
  * Модальне вікно завершення гри (використовує React Portal).
- * * @component
+ * @component GameOverDialog
+ * @name GameOverDialog
+ * @function
  * @param {Object} props - Пропси компонента.
  * @param {boolean} props.isOpen - Чи відображати діалог.
  * @param {number} props.moves - Загальна кількість зроблених ходів.

@@ -3,7 +3,10 @@ import styles from './Button.module.css'
 
 /**
  * Універсальний компонент кнопки.
- * * @component
+ * @component
+ * @name Button
+ * @alias Button
+ * @function
  * @param {Object} props - Пропси компонента.
  * @param {React.ReactNode} props.children - Вміст кнопки (текст або іконки).
  * @param {function} props.onClick - Функція, що викликається при натисканні.
